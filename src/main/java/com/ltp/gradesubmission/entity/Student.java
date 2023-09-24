@@ -17,7 +17,7 @@ public class Student extends RepresentationModel<Student>{
   
 
     public Student() {
-          this.id = Long.valueOf((long)Math.random());
+          this.id = Long.valueOf((long)(Math.random()*100));
     }
 
 
