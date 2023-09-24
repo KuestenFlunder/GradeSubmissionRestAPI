@@ -1,6 +1,9 @@
 package com.ltp.gradesubmission.entity;
 
-public class Grade {
+import org.springframework.hateoas.RepresentationModel;
+
+public class Grade extends RepresentationModel<Grade>{
+    
 
     private Long id;
     private String score;

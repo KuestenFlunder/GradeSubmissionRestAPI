@@ -14,14 +14,6 @@ public class Student extends RepresentationModel<Student>{
     private LocalDate birthDate;
 
 
-  
-
-    public Student() {
-          this.id = Long.valueOf((long)(Math.random()*100));
-    }
-
-
-
     public Long getId() {
         return this.id;
     }
