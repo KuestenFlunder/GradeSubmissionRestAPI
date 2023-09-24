@@ -57,29 +57,28 @@ public class GradeController {
 
     @PostMapping(value = "/students/{studentId}/courses/{courseId}")
     public ResponseEntity<Grade> saveGrade(@RequestBody Grade grade) {
-        grade.add(getSelfLink(grade));
-        grade.add(getDeleteLink(grade));
+       //TODO Add Hateoas to Method
         return new ResponseEntity<>(grade, HttpStatus.CREATED);
     }
 
-    // ? Make a Class with a Generic Method to create Links from [String methodName,
-    // String linkName, class T entity, class V Controller.class]
-    private Link getDeleteLink(Grade grade) {
-        Link deleteLink = WebMvcLinkBuilder.linkTo(
-                WebMvcLinkBuilder
-                        .methodOn(StudentController.class)
-                        .deleteStudent(grade.getId()))
-                .withRel("delete");
-        return deleteLink;
-    }
+    // // ? Make a Class with a Generic Method to create Links from [String methodName,
+    // // String linkName, class T entity, class V Controller.class]
+    // private Link getDeleteLink(Grade grade) {
+    //     Link deleteLink = WebMvcLinkBuilder.linkTo(
+    //             WebMvcLinkBuilder
+    //                     .methodOn(StudentController.class)
+    //                     .deleteStudent(grade.getId()))
+    //             .withRel("delete");
+    //     return deleteLink;
+    // }
 
-    private Link getSelfLink(Grade grade) {
-        Link selfLink = WebMvcLinkBuilder.linkTo(
-                WebMvcLinkBuilder
-                        .methodOn(StudentController.class)
-                        .getStudent(grade.getId()))
-                .withRel("self");
-        return selfLink;
-    }
+    // private Link getSelfLink(Grade grade) {
+    //     Link selfLink = WebMvcLinkBuilder.linkTo(
+    //             WebMvcLinkBuilder
+    //                     .methodOn(StudentController.class)
+    //                     .getStudent(grade.getId()))
+    //             .withRel("self");
+    //     return selfLink;
+    //}
 
 }
