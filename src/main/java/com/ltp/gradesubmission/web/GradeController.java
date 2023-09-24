@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GradeController {
     
     @GetMapping(value="/students/{studentId}/courses/{courseId}")
-    public ResponseEntity<Grade> getMethodName(@PathVariable Long studentId,@PathVariable Long courseId) {
+    public ResponseEntity<Grade> getGrade(@PathVariable Long studentId,@PathVariable Long courseId) {
         
         return new ResponseEntity<>(HttpStatus.OK);
     }
