@@ -1,11 +1,14 @@
 package com.ltp.gradesubmission.entity;
 
-public class Course {
 
+
+public class Course {
     private Long id;
     private String subject;
     private String code;
     private String description;
+
+
 
     public Long getId() {
         return this.id;

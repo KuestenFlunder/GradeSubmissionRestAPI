@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.hateoas.RepresentationModel;
 
-import lombok.Data;
+
 
 
 public class Student extends RepresentationModel<Student>{
