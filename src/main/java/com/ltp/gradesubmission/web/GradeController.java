@@ -11,7 +11,9 @@ import java.util.List;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +37,16 @@ public class GradeController {
     public ResponseEntity<List<Grade>> getStudentsGrades(@PathVariable Long studentId) {
 
         return new ResponseEntity<List<Grade>>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/courses/{courseId}")
+    public ResponseEntity<List<Grade>> getCourseGrades(@PathVariable Long courseId){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<Grade>> getGrades(){
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/students/{studentId}/courses/{courseId}")
