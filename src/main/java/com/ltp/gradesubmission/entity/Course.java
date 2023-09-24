@@ -1,8 +1,8 @@
 package com.ltp.gradesubmission.entity;
 
+import org.springframework.hateoas.RepresentationModel;
 
-
-public class Course {
+public class Course extends RepresentationModel<Course>{
     private Long id;
     private String subject;
     private String code;
