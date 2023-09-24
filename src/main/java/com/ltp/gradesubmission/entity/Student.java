@@ -2,11 +2,25 @@ package com.ltp.gradesubmission.entity;
 
 import java.time.LocalDate;
 
-public class Student {
+import org.springframework.hateoas.RepresentationModel;
+
+import lombok.Data;
+
+
+public class Student extends RepresentationModel<Student>{
 
     private Long id;
     private String name;
     private LocalDate birthDate;
+
+
+  
+
+    public Student() {
+          this.id = Long.valueOf((long)(Math.random()*100));
+    }
+
+
 
     public Long getId() {
         return this.id;
