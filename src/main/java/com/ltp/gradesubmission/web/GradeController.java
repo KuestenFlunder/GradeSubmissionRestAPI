@@ -1,5 +1,7 @@
 package com.ltp.gradesubmission.web;
 
+import com.ltp.gradesubmission.service.GradeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +21,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @RequestMapping("/grades")
 public class GradeController {
-
+    @Autowired
+    GradeService gradeService;
     @GetMapping(value = "/students/{studentId}/courses/{courseId}")
     public ResponseEntity<Grade> getGrade(@PathVariable Long studentId, @PathVariable Long courseId) {
 
@@ -52,6 +55,8 @@ public class GradeController {
     public ResponseEntity<Grade> saveGrade(@PathVariable Long studentId, @PathVariable Long courseId,@RequestBody Grade grade) {
         grade.add(getSelfLink(studentId, courseId));
         grade.add(getDeleteLink(studentId, courseId));
+        //TODO correct implementation
+        gradeService.saveGrade(grade,null,null );
         return new ResponseEntity<>(grade, HttpStatus.CREATED);
     }
 
