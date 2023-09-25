@@ -35,7 +35,8 @@ public class StudentController {
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<Student>> getAllStudents() {
-        return new ResponseEntity<>(HttpStatus.OK);
+        
+        return new ResponseEntity<>(studentService.getStudents(),HttpStatus.OK);
     }
 
     @PostMapping
