@@ -1,27 +1,23 @@
 package com.ltp.gradesubmission.entity;
 
 import org.springframework.hateoas.RepresentationModel;
+import lombok.*;
 
-public class Grade extends RepresentationModel<Grade>{
-    
+import javax.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "grades")
+
+public class Grade extends RepresentationModel<Grade> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "score")
     private String score;
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getScore() {
-        return this.score;
-    }
-
-    public void setScore(String score) {
-        this.score = score;
-    }
-
 }
