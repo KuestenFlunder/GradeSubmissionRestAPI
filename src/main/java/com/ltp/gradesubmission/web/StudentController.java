@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.service.StudentService;
-import com.ltp.gradesubmission.service.StudentServiceImpl;
 
 @RestController
 @RequestMapping("/students")
@@ -28,9 +27,7 @@ public class StudentController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
-        // only for test purpose,
-        // ! change to StudentService.getStudentById() when implemented
-        Student student = new Student();
+        Student student = studentService.getStudent(id);
         student.add(getDeleteLink(student));
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
@@ -45,7 +42,7 @@ public class StudentController {
         Student savedStudent = studentService.saveStudent(student);
         student.add(getSelfLink(savedStudent));
         student.add(getDeleteLink(savedStudent));
-        return new ResponseEntity<Student>(savedStudent, HttpStatus.CREATED);
+        return new ResponseEntity<Student>(student, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
