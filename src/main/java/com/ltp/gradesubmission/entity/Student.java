@@ -12,7 +12,12 @@ import javax.persistence.Table;
 import org.springframework.hateoas.RepresentationModel;
 
 
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "students")
 public class Student extends RepresentationModel<Student>{
@@ -26,28 +31,8 @@ public class Student extends RepresentationModel<Student>{
     private LocalDate birthDate;
 
 
-    public Long getId() {
-        return this.id;
-    }
+  
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public LocalDate getBirthDate() {
-        return this.birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
-    }
+ 
 
 }
