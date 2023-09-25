@@ -30,9 +30,4 @@ public class Student extends RepresentationModel<Student>{
     @Column(name = "birth_date",nullable = false)
     private LocalDate birthDate;
 
-
-  
-
- 
-
 }

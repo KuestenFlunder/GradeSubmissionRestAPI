@@ -18,6 +18,6 @@ public class Grade extends RepresentationModel<Grade> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "score")
+    @Column(name = "score",nullable = false)
     private String score;
 }
