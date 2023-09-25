@@ -27,6 +27,7 @@ public class StudentController {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
+        //! getStudent returns null if student is not found in the db, fix this with error handling implementation
         Student student = studentService.getStudent(id);
         student.add(getDeleteLink(student));
         return new ResponseEntity<>(student, HttpStatus.OK);
@@ -47,7 +48,7 @@ public class StudentController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deleteStudent(@PathVariable Long id) {
-        // TODO Return the deleted student for cross-checking
+        studentService.deleteStudent(id);
         return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 
