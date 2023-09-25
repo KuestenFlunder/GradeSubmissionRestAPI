@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ltp.gradesubmission.entity.Grade;
 import java.util.List;
 
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,29 +49,27 @@ public class GradeController {
     }
 
     @PostMapping(value = "/students/{studentId}/courses/{courseId}")
-    public ResponseEntity<Grade> saveGrade(@RequestBody Grade grade) {
-       //TODO Add Hateoas to Method
+    public ResponseEntity<Grade> saveGrade(@PathVariable Long studentId, @PathVariable Long courseId,@RequestBody Grade grade) {
+        grade.add(getSelfLink(studentId, courseId));
+        grade.add(getDeleteLink(studentId, courseId));
         return new ResponseEntity<>(grade, HttpStatus.CREATED);
     }
 
-    // // ? Make a Class with a Generic Method to create Links from [String methodName,
-    // // String linkName, class T entity, class V Controller.class]
-    // private Link getDeleteLink(Grade grade) {
-    //     Link deleteLink = WebMvcLinkBuilder.linkTo(
-    //             WebMvcLinkBuilder
-    //                     .methodOn(StudentController.class)
-    //                     .deleteStudent(grade.getId()))
-    //             .withRel("delete");
-    //     return deleteLink;
-    // }
+   
+    private Link getDeleteLink(Long studentId, Long courseId) {
+        Link deleteLink = WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(GradeController.class)
+                        .deleteGrade(studentId, courseId))
+                .withRel("delete");
+        return deleteLink;
+    }
 
-    // private Link getSelfLink(Grade grade) {
-    //     Link selfLink = WebMvcLinkBuilder.linkTo(
-    //             WebMvcLinkBuilder
-    //                     .methodOn(StudentController.class)
-    //                     .getStudent(grade.getId()))
-    //             .withRel("self");
-    //     return selfLink;
-    //}
+    private Link getSelfLink(Long studentId, Long courseId) {
+        Link selfLink = WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(GradeController.class)
+                        .getGrade(studentId, courseId))
+                .withRel("self");
+        return selfLink;
+    }
 
 }
