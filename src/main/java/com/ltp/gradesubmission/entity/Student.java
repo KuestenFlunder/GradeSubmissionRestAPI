@@ -2,11 +2,13 @@ package com.ltp.gradesubmission.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+
 import org.springframework.hateoas.RepresentationModel;
 
 
 
-
+@Entity
 public class Student extends RepresentationModel<Student>{
 
     private Long id;
