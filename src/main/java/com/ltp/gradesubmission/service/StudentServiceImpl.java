@@ -18,8 +18,8 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student getStudent(Long id) {
         return studentRepository
-            .findById(id)
-            .orElse(null);
+                .findById(id)
+                .orElse(new Student());
     }
 
     @Override
@@ -36,6 +36,7 @@ public class StudentServiceImpl implements StudentService {
     public List<Student> getStudents() {
         return  (List<Student>) studentRepository.findAll();
     }
+
 
 
 }
