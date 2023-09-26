@@ -35,9 +35,13 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade updateGrade(String score, Long studentId, Long courseId) {
-        Grade grade = gradeRepository.findByStudentIdAndCourseId(studentId,courseId);
+        Grade grade = gradeRepository.findByStudentIdAndCourseId(studentId, courseId);
+        if (grade == null) {
+            // Handle the case where no grade is found. Maybe throw an exception or return null.
+            throw new RuntimeException("Grade not found for given studentId and courseId");
+        }
         grade.setScore(score);
-        return grade;
+        return gradeRepository.save(grade);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public List<Grade> getAllGrades() {
-        return null;
+        return (List<Grade>) gradeRepository.findAll();
     }
 
 }
