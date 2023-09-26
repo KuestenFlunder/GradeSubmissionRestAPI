@@ -2,6 +2,7 @@ package com.ltp.gradesubmission.web;
 
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -18,11 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.service.StudentService;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/students")
 public class StudentController {
 
-    @Autowired
+
     StudentService studentService;
 
     @GetMapping(value = "/{id}")
