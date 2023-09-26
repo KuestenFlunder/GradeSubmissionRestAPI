@@ -56,7 +56,7 @@ public class GradeController {
         grade.add(getSelfLink(studentId, courseId));
         grade.add(getDeleteLink(studentId, courseId));
         //TODO correct implementation
-        gradeService.saveGrade(grade,null,null );
+        gradeService.saveGrade(grade,studentId,courseId );
         return new ResponseEntity<>(grade, HttpStatus.CREATED);
     }
 
