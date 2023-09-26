@@ -1,9 +1,11 @@
 package com.ltp.gradesubmission.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,4 +31,10 @@ public class Course extends RepresentationModel<Course> {
     @NonNull
     @Column(name = "description")
     private String description;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "course",
+            cascade = CascadeType.ALL)
+    private List<Grade> grades;
+
 }
