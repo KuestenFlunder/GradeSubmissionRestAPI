@@ -42,7 +42,7 @@ public class GradeController {
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<Grade>> getGrades() {
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(gradeService.getAllGrades(),HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/students/{studentId}/courses/{courseId}")
@@ -60,6 +60,9 @@ public class GradeController {
         return new ResponseEntity<>(grade, HttpStatus.CREATED);
     }
 
+    @PutMapping("/student/{studentId}/course/{courseId}")
+    public ResponseEntity<Grade> updateGrade(@RequestBody Grade grade, @PathVariable Long studentId, @PathVariable Long courseId) {
+        return new ResponseEntity<>(gradeService.updateGrade(grade.getScore(), studentId, courseId), HttpStatus.OK);}
 
     private Link createDeleteLink(Long studentId, Long courseId) {
         Link deleteLink = WebMvcLinkBuilder.linkTo(
