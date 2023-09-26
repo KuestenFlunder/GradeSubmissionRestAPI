@@ -20,10 +20,10 @@ public class Course extends RepresentationModel<Course> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-    @Column(name = "subject")
+    @Column(name = "subject",nullable = false)
     private String subject;
-    @Column(name = "code")
+    @Column(name = "code",nullable = false)
     private String code;
-    @Column(name = "description")
+    @Column(name = "description",nullable = false)
     private String description;
 }

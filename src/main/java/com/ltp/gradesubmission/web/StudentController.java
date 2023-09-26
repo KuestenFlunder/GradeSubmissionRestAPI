@@ -29,21 +29,22 @@ public class StudentController {
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         //! getStudent returns null if student is not found in the db, fix this with error handling implementation
         Student student = studentService.getStudent(id);
-        student.add(getDeleteLink(student));
+        student.add(createDeleteLink(student));
         return new ResponseEntity<>(student, HttpStatus.OK);
     }
 
     @GetMapping(value = "/all")
     public ResponseEntity<List<Student>> getAllStudents() {
-        
+        studentService.getStudents().forEach(student -> student.add(createSelfLink(student)));
+        studentService.getStudents().forEach(student -> student.add(createDeleteLink(student)));
         return new ResponseEntity<>(studentService.getStudents(),HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
         Student savedStudent = studentService.saveStudent(student);
-        student.add(getSelfLink(savedStudent));
-        student.add(getDeleteLink(savedStudent));
+        student.add(createSelfLink(savedStudent));
+        student.add(createDeleteLink(savedStudent));
         return new ResponseEntity<Student>(student, HttpStatus.CREATED);
     }
 
@@ -55,7 +56,7 @@ public class StudentController {
 
     // ? Make a Class with a Generic Method to create Links from [String methodName,
     // String linkName, class T entity, class V Controller.class]
-    private Link getDeleteLink(Student student) {
+    private Link createDeleteLink(Student student) {
         Link deleteLink = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder
                         .methodOn(StudentController.class)
@@ -64,7 +65,7 @@ public class StudentController {
         return deleteLink;
     }
 
-    private Link getSelfLink(Student student) {
+    private Link createSelfLink(Student student) {
         Link selfLink = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder
                         .methodOn(StudentController.class)
