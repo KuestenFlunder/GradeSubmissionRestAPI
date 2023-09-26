@@ -3,7 +3,11 @@ package com.ltp.gradesubmission.service;
 import java.util.List;
 
 import com.ltp.gradesubmission.entity.Course;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
+@Service
 public class CourseServiceImpl implements CourseService {
 
     @Override

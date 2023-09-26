@@ -2,6 +2,7 @@ package com.ltp.gradesubmission;
 
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.repository.StudentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,9 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+@AllArgsConstructor
 @SpringBootApplication
 public class GradeSubmissionApplication implements CommandLineRunner {
-    @Autowired
+
     StudentRepository studentRepository;
 
     public static void main(String[] args) {
