@@ -14,7 +14,9 @@ public class CourseServiceImpl implements CourseService {
     CourseRepository courseRepository;
     @Override
     public Course getCourse(Long id) {
-        return null;
+        //Todo refactor Optioal to orEach with Errorhandling
+
+        return courseRepository.findById(id).get();
     }
 
     @Override
@@ -23,12 +25,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public void deleteCourse(Long id) {        
+    public void deleteCourse(Long id) {
+        courseRepository.deleteById(id);
     }
 
     @Override
     public List<Course> getCourses() {
-        return null;
+        return (List<Course>) courseRepository.findAll();
     }
 
 }
