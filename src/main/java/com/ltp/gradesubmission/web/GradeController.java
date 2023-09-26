@@ -26,7 +26,8 @@ public class GradeController {
     @GetMapping(value = "/students/{studentId}/courses/{courseId}")
     public ResponseEntity<Grade> getGrade(@PathVariable Long studentId, @PathVariable Long courseId) {
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        System.out.println("I was called and got "+ gradeService.getGrade(studentId,courseId));
+        return new ResponseEntity<>(gradeService.getGrade(studentId,courseId),HttpStatus.OK);
     }
 
     @GetMapping(value = "students/{studentId}")
@@ -53,15 +54,15 @@ public class GradeController {
 
     @PostMapping(value = "/students/{studentId}/courses/{courseId}")
     public ResponseEntity<Grade> saveGrade(@PathVariable Long studentId, @PathVariable Long courseId,@RequestBody Grade grade) {
-        grade.add(getSelfLink(studentId, courseId));
-        grade.add(getDeleteLink(studentId, courseId));
+        grade.add(createSelfLink(studentId, courseId));
+        grade.add(createDeleteLink(studentId, courseId));
         //TODO correct implementation
         gradeService.saveGrade(grade,studentId,courseId );
         return new ResponseEntity<>(grade, HttpStatus.CREATED);
     }
 
    
-    private Link getDeleteLink(Long studentId, Long courseId) {
+    private Link createDeleteLink(Long studentId, Long courseId) {
         Link deleteLink = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder.methodOn(GradeController.class)
                         .deleteGrade(studentId, courseId))
@@ -69,7 +70,8 @@ public class GradeController {
         return deleteLink;
     }
 
-    private Link getSelfLink(Long studentId, Long courseId) {
+
+    private Link createSelfLink(Long studentId, Long courseId) {
         Link selfLink = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder.methodOn(GradeController.class)
                         .getGrade(studentId, courseId))
