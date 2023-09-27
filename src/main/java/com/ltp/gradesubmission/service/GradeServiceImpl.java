@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor // alternative to Autowired and preferred if there are many dependencies
 @Service
@@ -46,29 +47,34 @@ public class GradeServiceImpl implements GradeService {
     public Grade updateGrade(String score, Long studentId, Long courseId) {
         Grade grade = gradeRepository
                 .findByStudentIdAndCourseId(studentId, courseId)
-                .orElseThrow(() -> new GradeNotFoundException(studentId, courseId));
+                .orElseThrow(() ->new GradeNotFoundException(studentId,courseId));
         grade.setScore(score);
         return gradeRepository.save(grade);
     }
 
     @Override
     public void deleteGrade(Long studentId, Long courseId) {
-
+    gradeRepository.deleteByStudentIdAndCourseId(studentId,courseId);
     }
 
     @Override
     public List<Grade> getStudentGrades(Long studentId) {
-        return null;
+        return gradeRepository
+                .findByStudentId(studentId)
+                .orElseThrow(() -> new StudentNotFoundException(studentId));
     }
 
     @Override
     public List<Grade> getCourseGrades(Long courseId) {
-        return null;
+        return gradeRepository
+                .findByCourseId(courseId)
+                .orElseThrow(() -> new CourseNotFoundException(courseId));
     }
 
     @Override
     public List<Grade> getAllGrades() {
-        return (List<Grade>) gradeRepository.findAll();
+        return (List<Grade>) gradeRepository
+                .findAll();
     }
 
 }
