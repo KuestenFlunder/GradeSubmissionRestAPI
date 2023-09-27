@@ -25,7 +25,7 @@ public class Course extends RepresentationModel<Course> {
     private String subject;
 
     @NonNull
-    @Column(name = "code")
+    @Column(name = "code",unique = true)
     private String code;
 
     @NonNull
