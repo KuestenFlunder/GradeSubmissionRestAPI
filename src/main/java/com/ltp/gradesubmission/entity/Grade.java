@@ -10,7 +10,9 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "grades")
+@Table(name = "grades",uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"student_id","course_id"})
+})
 
 public class Grade extends RepresentationModel<Grade> {
 
