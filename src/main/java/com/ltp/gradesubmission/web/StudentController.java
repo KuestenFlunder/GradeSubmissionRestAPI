@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.service.StudentService;
 
+import javax.validation.Valid;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/students")
@@ -43,7 +45,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
+    public ResponseEntity<Student> saveStudent(@Valid @RequestBody Student student) {
         Student savedStudent = studentService.saveStudent(student);
         student.add(createSelfLink(savedStudent));
         student.add(createDeleteLink(savedStudent));
@@ -58,7 +60,7 @@ public class StudentController {
 
     // ? Make a Class with a Generic Method to create Links from [String methodName,
     // String linkName, class T entity, class V Controller.class]
-    private Link createDeleteLink(Student student) {
+    private Link createDeleteLink( Student student) {
         Link deleteLink = WebMvcLinkBuilder.linkTo(
                 WebMvcLinkBuilder
                         .methodOn(StudentController.class)
