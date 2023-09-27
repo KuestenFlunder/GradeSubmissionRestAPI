@@ -23,7 +23,6 @@ public class GradeController {
         Grade grade = gradeService.getGrade(studentId, courseId);
         grade.add(createSelfLink(studentId, courseId));
         grade.add(createDeleteLink(studentId, courseId));
-
         return new ResponseEntity<>(
                 grade,
                 HttpStatus.OK);

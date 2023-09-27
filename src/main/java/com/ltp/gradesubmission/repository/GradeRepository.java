@@ -3,6 +3,7 @@ package com.ltp.gradesubmission.repository;
 import com.ltp.gradesubmission.entity.Grade;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,5 +17,6 @@ public interface GradeRepository extends CrudRepository<Grade, Long> {
 
     Optional<List<Grade>> findByCourseId(Long courseId);
 
+    @Transactional
     void deleteByStudentIdAndCourseId(Long studentId,Long courseId);
 }
