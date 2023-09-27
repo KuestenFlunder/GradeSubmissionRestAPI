@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -22,14 +23,17 @@ public class Course extends RepresentationModel<Course> {
 
     @NonNull
     @Column(name = "subject")
+    @NotBlank(message = "Subject can not be blank")
     private String subject;
 
     @NonNull
     @Column(name = "code",unique = true)
+    @NotBlank(message = "Code can not be blank")
     private String code;
 
     @NonNull
     @Column(name = "description")
+    @NotBlank(message = "Description can not be blank")
     private String description;
 
     @JsonIgnore

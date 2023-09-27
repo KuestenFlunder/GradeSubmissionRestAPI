@@ -1,5 +1,6 @@
 package com.ltp.gradesubmission.entity;
 
+import com.ltp.gradesubmission.validation.Score;
 import org.springframework.hateoas.RepresentationModel;
 import lombok.*;
 
@@ -22,6 +23,7 @@ public class Grade extends RepresentationModel<Grade> {
     private Long id;
 
     @Column(name = "score",nullable = false)
+    @Score
     private String score;
 
     @ManyToOne(optional = false)
