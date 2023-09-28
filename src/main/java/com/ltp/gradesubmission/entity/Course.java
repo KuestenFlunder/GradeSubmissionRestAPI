@@ -41,4 +41,7 @@ public class Course extends RepresentationModel<Course> {
             cascade = CascadeType.ALL)
     private List<Grade> grades;
 
+    @ManyToMany
+    List<Student>student;
+
 }

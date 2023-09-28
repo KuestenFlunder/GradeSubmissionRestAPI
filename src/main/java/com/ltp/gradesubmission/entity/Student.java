@@ -37,4 +37,7 @@ public class Student extends RepresentationModel<Student>{
     @OneToMany(mappedBy = "student",
                 cascade = CascadeType.ALL)
     private List<Grade> grades;
+
+    @ManyToMany
+    List<Course>courses;
 }
