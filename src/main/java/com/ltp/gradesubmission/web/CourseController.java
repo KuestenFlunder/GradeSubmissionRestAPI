@@ -59,18 +59,14 @@ public class CourseController {
         return new ResponseEntity<>(courses,HttpStatus.OK);
     }
 
-    @GetMapping("/{courseId}")
-    public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long courseId){
-
-        return new ResponseEntity<>(courseService.getEnrolledStudents(courseId),HttpStatus.OK);
+    @PutMapping("/{courseId}/students/{studentId}")
+    public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long courseId, @PathVariable Long studentId) {
+        return new ResponseEntity<>(courseService.enrollStudentToCourse(studentId, courseId), HttpStatus.OK);
     }
 
-    @PostMapping("/{courseId}/students/{studentId}")
-    public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long studentId, @PathVariable Long courseId){
-
-        return new ResponseEntity<>(
-                courseService.addStudentToCourse(studentId,courseId),
-                HttpStatus.OK);
+    @GetMapping("/{id}/students")
+    public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long id) {
+        return new ResponseEntity<>(courseService.getEnrolledStudents(id), HttpStatus.OK);
     }
 
     // ? Make a Class with a Generic Method to create Links from [String methodName,

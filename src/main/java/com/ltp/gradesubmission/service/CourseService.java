@@ -11,7 +11,7 @@ public interface CourseService {
     Course saveCourse(Course course);
     void deleteCourse(Long id);
      List<Course> getCourses();
-     Course addStudentToCourse(Long studentId, Long courseId);
+     Course enrollStudentToCourse(Long studentId, Long courseId);
      Set<Student> getEnrolledStudents(Long courseId);
 
 }
