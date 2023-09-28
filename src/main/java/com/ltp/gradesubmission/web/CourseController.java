@@ -47,6 +47,7 @@ public class CourseController {
     }
 
 
+
     @GetMapping("/all")
     public ResponseEntity<List<Course>> getCourses() {
         List<Course> courses = courseService.getCourses();
@@ -56,6 +57,13 @@ public class CourseController {
         return new ResponseEntity<>(courses,HttpStatus.OK);
     }
 
+    @PostMapping("/{id}/students/{id}")
+    public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long studentId, @PathVariable Long courseId){
+
+        return new ResponseEntity<>(
+                courseService.addStudentToCourse(studentId,courseId),
+                HttpStatus.OK);
+    }
 
     // ? Make a Class with a Generic Method to create Links from [String methodName,
     // String linkName, class T entity, class V Controller.class]

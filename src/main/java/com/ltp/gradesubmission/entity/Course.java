@@ -7,6 +7,7 @@ import org.springframework.hateoas.RepresentationModel;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,7 +42,13 @@ public class Course extends RepresentationModel<Course> {
             cascade = CascadeType.ALL)
     private List<Grade> grades;
 
+
     @ManyToMany
-    List<Student>student;
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
+    )
+    Set<Student> students;
 
 }
