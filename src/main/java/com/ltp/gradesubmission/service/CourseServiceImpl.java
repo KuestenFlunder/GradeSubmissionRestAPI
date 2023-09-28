@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @Service
@@ -50,6 +51,11 @@ public class CourseServiceImpl implements CourseService {
         course.getStudents().add(student);
         return courseRepository.save(course);
 
+    }
+
+    @Override
+    public Set<Student> getEnrolledStudents(Long courseId) {
+        return null;
     }
 
 
