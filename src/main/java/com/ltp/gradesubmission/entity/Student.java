@@ -42,4 +42,5 @@ public class Student extends RepresentationModel<Student> {
     @JsonIgnore
     @ManyToMany(mappedBy = "students")
     private Set<Course> courses;
+
 }
