@@ -55,7 +55,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Set<Student> getEnrolledStudents(Long courseId) {
-        return null;
+        return getCourse(courseId).getStudents();
     }
 
 

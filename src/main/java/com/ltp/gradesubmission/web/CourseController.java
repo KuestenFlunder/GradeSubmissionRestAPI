@@ -1,6 +1,7 @@
 package com.ltp.gradesubmission.web;
 
 import com.ltp.gradesubmission.entity.Course;
+import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.repository.CourseRepository;
 import com.ltp.gradesubmission.service.CourseService;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @RestController
@@ -57,7 +59,13 @@ public class CourseController {
         return new ResponseEntity<>(courses,HttpStatus.OK);
     }
 
-    @PostMapping("/{id}/students/{id}")
+    @GetMapping("/{courseId}")
+    public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long courseId){
+
+        return new ResponseEntity<>(courseService.getEnrolledStudents(courseId),HttpStatus.OK);
+    }
+
+    @PostMapping("/{courseId}/students/{studentId}")
     public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long studentId, @PathVariable Long courseId){
 
         return new ResponseEntity<>(
