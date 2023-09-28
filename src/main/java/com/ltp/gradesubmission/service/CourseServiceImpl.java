@@ -42,20 +42,20 @@ public class CourseServiceImpl implements CourseService {
     }
 
 
+    @Override
     public Course enrollStudentToCourse(Long studentId, Long courseId) {
         Course course = getCourse(courseId);
         Student student = studentRepository
                 .findById(studentId)
-                .orElseThrow(()->new StudentNotFoundException(studentId));
-
+                .orElseThrow(() -> new StudentNotFoundException(studentId));
         course.getStudents().add(student);
         return courseRepository.save(course);
     }
 
     @Override
-    public Set<Student> getEnrolledStudents(Long courseId) {
-        return getCourse(courseId).getStudents();
+    public Set<Student> getEnrolledStudents(Long id) {
+        Course course = getCourse(id);
+        return course.getStudents();
     }
-
 
 }

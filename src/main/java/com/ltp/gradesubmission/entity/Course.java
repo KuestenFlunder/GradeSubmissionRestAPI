@@ -43,12 +43,13 @@ public class Course extends RepresentationModel<Course> {
     private List<Grade> grades;
 
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "course_student",
-            joinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id")
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id")
     )
-    Set<Student> students;
+    private Set<Student> students;
 
 }
