@@ -16,14 +16,14 @@ import java.util.Set;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-    CourseRepository courseRepository;
-    StudentService studentService;
+    private CourseRepository courseRepository;
+ private StudentRepository studentRepository;
 
     @Override
     public Course getCourse(Long id) {
-        return courseRepository
-                .findById(id)
-                .orElseThrow(() -> new CourseNotFoundException(id));
+        return courseRepository.
+                findById(id).
+                orElseThrow(() -> new CourseNotFoundException(id));
     }
 
     @Override
@@ -45,7 +45,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course addStudentToCourse(Long studentId, Long courseId) {
         Course course = getCourse(courseId);
-        course.getStudents().add( studentService.getStudent(studentId));
+        course.getStudents().add( studentRepository.findById(studentId).orElseThrow(()->new StudentNotFoundException(studentId)));
         return courseRepository.save(course);
     }
 

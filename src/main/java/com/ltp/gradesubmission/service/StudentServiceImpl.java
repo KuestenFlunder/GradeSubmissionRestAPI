@@ -2,7 +2,9 @@ package com.ltp.gradesubmission.service;
 
 import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Student;
+import com.ltp.gradesubmission.exceptions.CourseNotFoundException;
 import com.ltp.gradesubmission.exceptions.StudentNotFoundException;
+import com.ltp.gradesubmission.repository.CourseRepository;
 import com.ltp.gradesubmission.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,8 @@ import java.util.Set;
 public class StudentServiceImpl implements StudentService {
 
 
-    StudentRepository studentRepository;
-    CourseService courseService;
+    private StudentRepository studentRepository;
+    private CourseRepository courseRepository;
 
     @Override
     public Student getStudent(Long id) {
@@ -26,7 +28,9 @@ public class StudentServiceImpl implements StudentService {
     }
     @Override
     public Student addCourseToStudent(Long studentId, Long courseId) {
-        Course course = courseService.getCourse(courseId);
+        Course course = courseRepository.
+                findById(courseId).
+                orElseThrow(()-> new CourseNotFoundException(courseId));
         Student student = getStudent(studentId);
         student.getCourses().add(course);
         return studentRepository.save(student);
