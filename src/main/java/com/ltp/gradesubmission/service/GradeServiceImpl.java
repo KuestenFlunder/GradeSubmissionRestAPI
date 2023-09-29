@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor // alternative to Autowired and preferred if there are many dependencies
 @Service
@@ -37,13 +36,14 @@ public class GradeServiceImpl implements GradeService {
         Student student = studentService.getStudent(studentId);
         Course course = courseService.getCourse(courseId);
 
-          if(courseService.getEnrolledStudents(courseId).contains(student)){
-            grade.setStudent(student);
-            grade.setCourse(course);
-            return gradeRepository.save(grade);
-        } else {
+        if (!courseService.getEnrolledStudents(courseId).contains(student)) {
             throw new StudentNotEnrolledException(studentId, courseId);
         }
+        grade.setStudent(student);
+        grade.setCourse(course);
+        return gradeRepository.save(grade);
+
+
     }
 
     @Override
