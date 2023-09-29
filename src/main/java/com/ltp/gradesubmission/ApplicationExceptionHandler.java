@@ -1,9 +1,6 @@
 package com.ltp.gradesubmission;
 
-import com.ltp.gradesubmission.exceptions.CourseNotFoundException;
-import com.ltp.gradesubmission.exceptions.ErrorResponse;
-import com.ltp.gradesubmission.exceptions.GradeNotFoundException;
-import com.ltp.gradesubmission.exceptions.StudentNotFoundException;
+import com.ltp.gradesubmission.exceptions.*;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
@@ -43,6 +40,13 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(
                 new ErrorResponse(Arrays.asList("Data Integrity Violation: we cannot process your request")),
                 HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(StudentNotEnrolledException.class)
+    public ResponseEntity<Object> handleStudentNotEnrolledException(RuntimeException ex){
+        return new ResponseEntity<>(
+                new ErrorResponse(Arrays.asList(ex.getMessage())),
+                HttpStatus.NOT_FOUND);
     }
 
 }
