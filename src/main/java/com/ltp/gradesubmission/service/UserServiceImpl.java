@@ -1,7 +1,7 @@
 package com.ltp.gradesubmission.service;
 
 import com.ltp.gradesubmission.entity.User;
-import com.ltp.gradesubmission.exceptions.UserNotFoundException;
+import com.ltp.gradesubmission.exceptions.EntityNotFoundException;
 import com.ltp.gradesubmission.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -53,6 +53,6 @@ public class UserServiceImpl implements UserService{
     public User getUserByUsername(String username){
         return userRepository.
                 findByUsername(username).
-                orElseThrow(()-> new UserNotFoundException(username));
+                orElseThrow(()-> new EntityNotFoundException(username,User.class));
     }
 }

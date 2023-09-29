@@ -3,10 +3,7 @@ package com.ltp.gradesubmission.service;
 import com.ltp.gradesubmission.entity.Course;
 import com.ltp.gradesubmission.entity.Grade;
 import com.ltp.gradesubmission.entity.Student;
-import com.ltp.gradesubmission.exceptions.CourseNotFoundException;
-import com.ltp.gradesubmission.exceptions.GradeNotFoundException;
-import com.ltp.gradesubmission.exceptions.StudentNotEnrolledException;
-import com.ltp.gradesubmission.exceptions.StudentNotFoundException;
+import com.ltp.gradesubmission.exceptions.*;
 import com.ltp.gradesubmission.repository.GradeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,7 +46,7 @@ public class GradeServiceImpl implements GradeService {
     public Grade updateGrade(String score, Long studentId, Long courseId) {
         Grade grade = gradeRepository
                 .findByStudentIdAndCourseId(studentId, courseId)
-                .orElseThrow(() -> new GradeNotFoundException(studentId, courseId));
+                .orElseThrow(() -> new EntityNotFoundException(studentId,Student.class,courseId,Course.class));
         grade.setScore(score);
         return gradeRepository.save(grade);
     }
@@ -63,7 +60,7 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> getStudentGrades(Long studentId) {
         return gradeRepository
                 .findByStudentId(studentId)
-                .orElseThrow(() -> new StudentNotFoundException(studentId));
+                .orElseThrow(() -> new EntityNotFoundException(studentId,Student.class));
     }
 
     @Override

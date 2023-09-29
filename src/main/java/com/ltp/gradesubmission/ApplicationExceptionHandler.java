@@ -24,13 +24,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler({CourseNotFoundException.class, GradeNotFoundException.class, StudentNotFoundException.class})
-    public ResponseEntity<Object> handeleRecourceNotFoundExceptions(RuntimeException ex){
-        return  new ResponseEntity<>(
-                new ErrorResponse(Collections.singletonList(ex.getMessage())),
-                HttpStatus.NOT_FOUND);
-    }
-
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<Object> handleEmptyResltDataAccessException(RuntimeException ex){
         return new ResponseEntity<>(
@@ -52,8 +45,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
                 HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public  ResponseEntity<Object> handleUserNotFoundException(RuntimeException ex){
+    @ExceptionHandler(EntityNotFoundException.class)
+    public  ResponseEntity<Object> handleEntityNotFoundException(RuntimeException ex){
         return new ResponseEntity<>(
                 new ErrorResponse(Collections.singletonList(ex.getMessage())),
                 HttpStatus.NOT_FOUND);
