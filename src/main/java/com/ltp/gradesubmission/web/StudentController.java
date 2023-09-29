@@ -1,7 +1,9 @@
 package com.ltp.gradesubmission.web;
 
 import java.util.List;
+import java.util.Set;
 
+import com.ltp.gradesubmission.entity.Course;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
@@ -42,6 +44,11 @@ public class StudentController {
         studentService.getStudents().forEach(student -> student.add(createSelfLink(student)));
         studentService.getStudents().forEach(student -> student.add(createDeleteLink(student)));
         return new ResponseEntity<>(studentService.getStudents(),HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/courses")
+    public ResponseEntity<Set<Course>> getEnrolledCourses(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.getEnrolledCourses(id), HttpStatus.OK);
     }
 
     @PostMapping
