@@ -37,9 +37,7 @@ public class GradeServiceImpl implements GradeService {
         Student student = studentService.getStudent(studentId);
         Course course = courseService.getCourse(courseId);
 
-        if ( courseService.getEnrolledStudents(courseId)
-                .stream()
-                .anyMatch(enrolledStudent -> enrolledStudent.equals(student))) {
+          if(courseService.getEnrolledStudents(courseId).contains(student)){
             grade.setStudent(student);
             grade.setCourse(course);
             return gradeRepository.save(grade);
