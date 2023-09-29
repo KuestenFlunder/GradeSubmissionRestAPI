@@ -17,7 +17,7 @@ import java.util.Set;
 public class CourseServiceImpl implements CourseService {
 
     CourseRepository courseRepository;
-    StudentRepository studentRepository;
+    StudentService studentService;
 
     @Override
     public Course getCourse(Long id) {
@@ -45,10 +45,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course addStudentToCourse(Long studentId, Long courseId) {
         Course course = getCourse(courseId);
-        Student student = studentRepository
-                .findById(studentId)
-                .orElseThrow(() -> new StudentNotFoundException(studentId));
-        course.getStudents().add(student);
+        course.getStudents().add( studentService.getStudent(studentId));
         return courseRepository.save(course);
     }
 

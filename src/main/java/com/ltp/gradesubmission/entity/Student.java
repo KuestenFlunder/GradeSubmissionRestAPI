@@ -41,7 +41,12 @@ public class Student extends RepresentationModel<Student> {
     private List<Grade> grades;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "students")
+    @ManyToMany
+    @JoinTable(
+            name = "course_student",
+            joinColumns = @JoinColumn( name = "student_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id")
+    )
     private Set<Course> courses;
 
     @Override
