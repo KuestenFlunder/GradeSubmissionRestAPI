@@ -20,18 +20,19 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> saveUser(@RequestBody User user){
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
+    public ResponseEntity<User> saveUser(@RequestBody User user) {
+        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
 
     @GetMapping()
-    public ResponseEntity<Set<User>> getUsers(){
-        return new ResponseEntity<>(userService.getUsers(),HttpStatus.OK);
+    public ResponseEntity<Set<User>> getUsers() {
+        return new ResponseEntity<>(userService.getUsers(), HttpStatus.OK);
     }
 
-
-
-
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.FOUND);
+    }
 
 
 }

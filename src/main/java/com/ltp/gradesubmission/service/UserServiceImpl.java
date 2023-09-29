@@ -1,6 +1,7 @@
 package com.ltp.gradesubmission.service;
 
 import com.ltp.gradesubmission.entity.User;
+import com.ltp.gradesubmission.exceptions.UserNotFoundException;
 import com.ltp.gradesubmission.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUserById(Long userId) {
-        return null;
+        return userRepository.
+                findByUserId(userId).
+                orElseThrow(()-> new UserNotFoundException(userId));
     }
 
     @Override
