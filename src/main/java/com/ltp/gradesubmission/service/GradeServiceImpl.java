@@ -24,7 +24,7 @@ public class GradeServiceImpl implements GradeService {
     public Grade getGrade(Long studentId, Long courseId) {
         return gradeRepository
                 .findByStudentIdAndCourseId(studentId, courseId)
-                .orElseThrow(() -> new GradeNotFoundException(studentId, courseId));
+                .orElseThrow(() -> new EntityNotFoundException(studentId,Student.class,courseId,Course.class));
     }
 
     @Override
