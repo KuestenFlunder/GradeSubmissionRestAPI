@@ -67,7 +67,7 @@ public class GradeServiceImpl implements GradeService {
     public List<Grade> getCourseGrades(Long courseId) {
         return gradeRepository
                 .findByCourseId(courseId)
-                .orElseThrow(() -> new CourseNotFoundException(courseId));
+                .orElseThrow(() -> new EntityNotFoundException(courseId,Course.class));
     }
 
     @Override

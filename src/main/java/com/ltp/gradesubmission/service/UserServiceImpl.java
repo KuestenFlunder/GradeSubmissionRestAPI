@@ -31,14 +31,14 @@ public class UserServiceImpl implements UserService{
     public User getUserById(Long userId) {
         return userRepository.
                 findByUserId(userId).
-                orElseThrow(()-> new UserNotFoundException(userId));
+                orElseThrow(()-> new EntityNotFoundException(userId,User.class));
     }
 
     @Override
     public User updateUserById(Long userId, User user) {
         User existiongUser = userRepository.
                 findByUserId(userId).
-                orElseThrow(()-> new UserNotFoundException(userId));
+                orElseThrow(()-> new EntityNotFoundException(userId,User.class));
         existiongUser.setUsername(user.getUsername());
         existiongUser.setPassword(user.getPassword());
         return userRepository.save(existiongUser);
