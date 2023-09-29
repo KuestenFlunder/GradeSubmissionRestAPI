@@ -43,7 +43,7 @@ public class CourseServiceImpl implements CourseService {
 
 
     @Override
-    public Course enrollStudentToCourse(Long studentId, Long courseId) {
+    public Course addStudentToCourse(Long studentId, Long courseId) {
         Course course = getCourse(courseId);
         Student student = studentRepository
                 .findById(studentId)
@@ -57,5 +57,6 @@ public class CourseServiceImpl implements CourseService {
         Course course = getCourse(id);
         return course.getStudents();
     }
+
 
 }

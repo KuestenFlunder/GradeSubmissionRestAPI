@@ -7,12 +7,14 @@ import org.springframework.hateoas.RepresentationModel;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @RequiredArgsConstructor
+
 @Entity
 @Table(name = "courses")
 
@@ -52,4 +54,17 @@ public class Course extends RepresentationModel<Course> {
     )
     private Set<Student> students;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Course course = (Course) o;
+        return Objects.equals(id, course.id) && Objects.equals(code, course.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id, code);
+    }
 }
