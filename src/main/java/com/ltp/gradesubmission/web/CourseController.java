@@ -1,6 +1,7 @@
 package com.ltp.gradesubmission.web;
 
 import com.ltp.gradesubmission.entity.Course;
+import com.ltp.gradesubmission.entity.Student;
 import com.ltp.gradesubmission.repository.CourseRepository;
 import com.ltp.gradesubmission.service.CourseService;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 @AllArgsConstructor
 @RestController
@@ -29,7 +32,7 @@ public class CourseController {
 
 
     @PostMapping
-    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
+    public ResponseEntity<Course> saveCourse(@Valid @RequestBody Course course) {
         Course savedCourse = courseService.saveCourse(course);
         if (course != null) {
             savedCourse.add(createSelfLink(course));
@@ -46,6 +49,7 @@ public class CourseController {
     }
 
 
+
     @GetMapping("/all")
     public ResponseEntity<List<Course>> getCourses() {
         List<Course> courses = courseService.getCourses();
@@ -55,6 +59,15 @@ public class CourseController {
         return new ResponseEntity<>(courses,HttpStatus.OK);
     }
 
+    @PutMapping("/{courseId}/students/{studentId}")
+    public ResponseEntity<Course> enrollStudentToCourse(@PathVariable Long courseId, @PathVariable Long studentId) {
+        return new ResponseEntity<>(courseService.addStudentToCourse(studentId, courseId), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/students")
+    public ResponseEntity<Set<Student>> getEnrolledStudents(@PathVariable Long id) {
+        return new ResponseEntity<>(courseService.getEnrolledStudents(id), HttpStatus.OK);
+    }
 
     // ? Make a Class with a Generic Method to create Links from [String methodName,
     // String linkName, class T entity, class V Controller.class]

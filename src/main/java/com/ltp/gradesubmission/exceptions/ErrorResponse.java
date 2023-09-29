@@ -14,7 +14,7 @@ public class ErrorResponse {
     private LocalDate localDate;
     private List<String> message;
 
-    public ErrorResponse(LocalDate localDate, List<String> message) {
+    public ErrorResponse(List<String> message) {
         this.localDate = LocalDate.now();
         this.message = message;
     }
