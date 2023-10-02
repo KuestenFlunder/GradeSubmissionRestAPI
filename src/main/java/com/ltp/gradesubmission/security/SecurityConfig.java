@@ -4,6 +4,7 @@ package com.ltp.gradesubmission.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import lombok.AllArgsConstructor;
@@ -20,6 +21,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.POST,SecurityConstants.REGISTER_PATH).permitAll()// allows every post on the register path
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

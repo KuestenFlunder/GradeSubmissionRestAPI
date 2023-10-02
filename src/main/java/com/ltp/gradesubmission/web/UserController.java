@@ -4,6 +4,7 @@ import com.ltp.gradesubmission.entity.User;
 import com.ltp.gradesubmission.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.query.Jpa21Utils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserController {
-
+    @Autowired
     UserService userService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
     }
@@ -50,6 +51,7 @@ public class UserController {
     public ResponseEntity<User> getUserByUsername(@PathVariable String username){
         return new ResponseEntity<>(userService.getUserByUsername(username),HttpStatus.OK);
     }
+
 
 
 }
