@@ -3,7 +3,7 @@ package com.ltp.gradesubmission.security;
 
 
 import com.ltp.gradesubmission.security.filter.AuthenticationFilter;
-import com.ltp.gradesubmission.security.filter.FilterOne;
+import com.ltp.gradesubmission.security.filter.ExceptionHandlerFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,SecurityConstants.REGISTER_PATH).permitAll()// allows every post on the register path
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new FilterOne(),AuthenticationFilter.class)
+                .addFilterBefore(new ExceptionHandlerFilter(),AuthenticationFilter.class)
                 .addFilter(authenticationFilter)
 
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
