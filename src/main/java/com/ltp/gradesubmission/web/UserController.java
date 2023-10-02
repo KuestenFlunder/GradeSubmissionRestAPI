@@ -22,8 +22,9 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/register")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        return new ResponseEntity<>(userService.saveUser(user), HttpStatus.CREATED);
+    public ResponseEntity<HttpStatus> saveUser(@RequestBody User user) {
+        userService.saveUser(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/users")
