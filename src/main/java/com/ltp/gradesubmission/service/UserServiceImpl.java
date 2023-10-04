@@ -28,8 +28,8 @@ public class UserServiceImpl implements UserService{
         return returnedUser;
     }
 
-    @Override
-    public Set<User> getUsers() {
+
+    private Set<User> getUsers() {
         return (Set<User>) userRepository.findAll();
     }
 
