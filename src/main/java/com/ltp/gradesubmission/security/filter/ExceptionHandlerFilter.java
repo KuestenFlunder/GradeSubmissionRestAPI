@@ -1,6 +1,7 @@
 package com.ltp.gradesubmission.security.filter;
 
 
+import com.ltp.gradesubmission.exceptions.EntityNotFoundException;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -16,7 +17,12 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
     try {
         filterChain.doFilter(request,response);
-    }catch (RuntimeException e){
+    }catch (EntityNotFoundException entityNotFoundException){
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        response.getWriter().write("Wrong username!");
+        response.getWriter().flush();
+    }
+    catch (RuntimeException runtimeException){
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         response.getWriter().write("Bad Request message");
         response.getWriter().flush();
