@@ -15,8 +15,8 @@ In this refactored version:
 - **Enhanced Security**: Implemented JWT Tokenized Authentication, ensuring a secure environment for users and their data.
   
 - **Database Integration with JPA/Hibernate**: Opted for the power of JPA and Hibernate for efficient data handling and persistence, providing scalability and performance improvements.
-  
-- **End-to-End Testing**: Expanded on the initial unit tests with integration tests to verify the seamless operation of the entire system.
+
+- **Hypermedia-Driven API with HATEOAS**: Adopted the HATEOAS principle to make the API more self-descriptive and navigable, enhancing user experience and discoverability.
 
 ## Technology Stack
 
@@ -26,7 +26,7 @@ In this refactored version:
   
 - **JWT**: For secure and stateless authentication, ensuring data privacy and system security.
   
-- **JUnit & Mockito**: Retained for robust testing, now expanded to include more complex scenarios.
+- **HATEOAS**: Implemented to provide a more intuitive and navigable API experience for users.
 
 ## Refactor Insights
 
@@ -51,5 +51,4 @@ I cordially invite you to delve into this repository and see the transformation 
 Looking forward to the prospects of further collaborations and mutual growth.
 
 Warm Regards,
-
 KuestenFlunder
